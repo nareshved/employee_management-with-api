@@ -18,22 +18,25 @@ Widget employeeEditTextField(
         width: 14,
       ),
       Expanded(
-        child: TextFormField(
-            keyboardType: keyboard,
-            controller: controller,
-            autocorrect: true,
-            autofocus: true,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            minLines: 1,
-            validator: editValidator,
-            decoration: InputDecoration(
-              label: Text(
-                lableName,
-              ),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
-              hintText: hint,
-            )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextFormField(
+              keyboardType: keyboard,
+              controller: controller,
+              autocorrect: true,
+              autofocus: true,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              minLines: 1,
+              validator: editValidator,
+              decoration: InputDecoration(
+                label: Text(
+                  lableName,
+                ),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
+                hintText: hint,
+              )),
+        ),
       ),
     ],
   );

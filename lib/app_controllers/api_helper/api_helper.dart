@@ -41,6 +41,7 @@ class ApiHelper {
       final mData = jsonDecode(response.body);
 
       final eEmployee = EmployeeModel.fromJson(mData);
+      log("fetch Employees By this Id : ${eEmployee.toString()}");
       return eEmployee;
     } else {
       throw Exception("Failed to load employee");
@@ -49,7 +50,7 @@ class ApiHelper {
 
   static Future<void> createEmployee() async {
     //EmployeeModel employee
-    var uri = Uri.parse("$apiUrl/employee");
+    var uri = Uri.parse(apiUrl);
 
     final response = await http.post(
       uri,
@@ -66,18 +67,24 @@ class ApiHelper {
   }
 
   static Future<void> editEmployee(String id, EmployeeModel employee) async {
-    final response = await http.put(
-      Uri.parse('${apiUrl}employees/:$id'),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(employee.toJson()),
-    );
-    if (response.statusCode != 200) {
-      throw Exception("Failed to edit employee");
+    try {
+      final response = await http.put(
+        Uri.parse('$apiUrl/$id'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(employee.toJson()),
+      );
+      if (response.statusCode == 200) {
+        log("Employee updated successfully");
+      } else {
+        log("Failed to edit employee: ${response.statusCode}");
+      }
+    } catch (ex) {
+      log("Error occurred: $ex");
     }
   }
 
   static Future<void> deleteEmployee(String id) async {
-    final response = await http.delete(Uri.parse('${apiUrl}employees/:$id'));
+    final response = await http.delete(Uri.parse('$apiUrl/$id'));
     if (response.statusCode != 200) {
       throw Exception("Failed to delete employee");
     } else {
@@ -98,3 +105,22 @@ class ApiHelper {
     }
   }
 }
+
+
+
+
+
+
+
+  // static Future<void> editEmployee(String id, EmployeeModel employee) async {
+  //   final response = await http.put(
+  //     Uri.parse('${apiUrl}employees/:$id'),
+  //     headers: {"Content-Type": "application/json"},
+  //     body: jsonEncode(employee.toJson()),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     throw Exception("Failed to edit employee");
+  //   } else {
+  //     log("Failed");
+  //   }
+  // }

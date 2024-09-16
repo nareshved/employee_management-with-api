@@ -20,34 +20,32 @@ class EmployeeDetailsPage extends StatelessWidget {
         children: [
           SizedBox(
             width: mq.width,
-            child: Expanded(
-              child: Card(
-                margin: const EdgeInsets.all(11),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    radius: 20,
-                    child: CachedNetworkImage(
-                      fit: BoxFit.contain,
-                      imageUrl: detailsEmployee.avatar!,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error_outline),
+            child: Card(
+              margin: const EdgeInsets.all(11),
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 20,
+                  child: CachedNetworkImage(
+                    fit: BoxFit.contain,
+                    imageUrl: detailsEmployee.avatar!,
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error_outline),
+                  ),
+                ),
+                title: Text(detailsEmployee.name!),
+                subtitle: Row(
+                  children: [
+                    const Icon(
+                      Icons.call,
+                      size: 18.0,
                     ),
-                  ),
-                  title: Text(detailsEmployee.name!),
-                  subtitle: Row(
-                    children: [
-                      const Icon(
-                        Icons.call,
-                        size: 18.0,
-                      ),
-                      SizedBox(
-                        width: mq.width * 0.010,
-                      ),
-                      Text(detailsEmployee.mobile!)
-                    ],
-                  ),
+                    SizedBox(
+                      width: mq.width * 0.010,
+                    ),
+                    Text(detailsEmployee.mobile!)
+                  ],
                 ),
               ),
             ),

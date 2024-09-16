@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddEmployeePage extends StatelessWidget {
-  const AddEmployeePage({super.key});
+class CreateEmployeePage extends StatelessWidget {
+  const CreateEmployeePage({super.key});
 
   @override
   Widget build(BuildContext context) {

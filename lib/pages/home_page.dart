@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:employee_management/pages/add_employee.dart';
+import 'package:employee_management/pages/create_employee.dart';
 import 'package:employee_management/pages/details_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../app_controllers/api_helper/api_helper.dart';
 import '../app_controllers/api_helper/provider/employee_provider.dart';
+import '../widgets/delete_alert_box.dart';
 import '../widgets/search_controller.dart';
 import 'edit_employee.dart';
 
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+  final TextEditingController deleteController = TextEditingController();
 
   @override
   void initState() {
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddEmployeePage(),
+                builder: (context) => const CreateEmployeePage(),
               ));
         },
       ),
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, provider, child) {
           if (provider.employees.isEmpty) {
             provider.fetchAllEmployees();
+
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -56,10 +59,26 @@ class _HomePageState extends State<HomePage> {
           return provider.employees.isNotEmpty
               ? Column(
                   children: [
-                    Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: searchTextField(
-                            searchController: _searchController)),
+                    // Padding(
+                    //     padding: const EdgeInsets.all(12),
+                    //     child: searchTextField(
+                    //         searchController: _searchController)),
+
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+                    //     OutlinedButton(
+                    //         onPressed: () {},
+                    //         child: const Text("Get Employee by id")),
+                    //     OutlinedButton(
+                    //         onPressed: () {},
+                    //         child: const Text("Create Employee")),
+                    //   ],
+                    // ),
+                    // const Divider(
+                    //   color: Colors.grey,
+                    // ),
+
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -96,6 +115,16 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
+                                        EmployeeEditPage.editEmployeeData(
+                                            createdAt: eachEmployee.createdAt!,
+                                            name: eachEmployee.name!,
+                                            avatar: eachEmployee.avatar!,
+                                            emailId: eachEmployee.emailId!,
+                                            id: eachEmployee.id!,
+                                            mobile: eachEmployee.mobile!,
+                                            state: eachEmployee.state!,
+                                            district: eachEmployee.district!,
+                                            email: eachEmployee.email!);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -107,7 +136,10 @@ class _HomePageState extends State<HomePage> {
                                       },
                                       icon: const Icon(Icons.edit)),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        deleteEmployeeAlertBox(context,
+                                            deleteController: deleteController);
+                                      },
                                       icon: const Icon(Icons.delete))
                                 ],
                               ),

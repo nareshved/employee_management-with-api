@@ -1,14 +1,17 @@
 import 'dart:developer';
 import 'package:employee_management/app_controllers/api_helper/api_helper.dart';
 import 'package:employee_management/models/countries_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../models/employee_model.dart';
 
 class EmployeeProvider extends ChangeNotifier {
   List<EmployeeModel> _employees = [];
+  final List<dynamic> _employeesById = [];
   List<CountriesModel> _countries = [];
 
   List<EmployeeModel> get employees => _employees;
+  List<dynamic> get employeesByIdList => _employeesById;
   List<CountriesModel> get countries => _countries;
   List<EmployeeModel> get filterEmployeess => _filteredEmployees;
 
@@ -40,8 +43,11 @@ class EmployeeProvider extends ChangeNotifier {
 
   Future<void> fetchAllEmployeesById(String id) async {
     try {
-      await ApiHelper.getAllEmployeesById(id);
+      var response = await ApiHelper.getAllEmployeesById(id);
+      _employeesById.add(response);
       notifyListeners();
+      log("provider fetch Employees By Id sucessfully: ${id.toString()}");
+      log("provider Employees By Id list success add : $employeesByIdList");
     } catch (e) {
       log("fetchAllEmployeesById : ${e.toString()}");
     }
@@ -49,7 +55,10 @@ class EmployeeProvider extends ChangeNotifier {
 
   Future<void> editEmployee(String id, EmployeeModel employee) async {
     try {
-      await ApiHelper.editEmployee(id, employee);
+      if (employee.name != null && employee.country != null) {
+        await ApiHelper.editEmployee(id, employee);
+      } else {}
+
       notifyListeners();
     } catch (e) {
       log("edit employee : ${e.toString()}");
@@ -90,4 +99,8 @@ class EmployeeProvider extends ChangeNotifier {
   //     _filteredEmployees = _employees;
   //   }
   // }
+
+  /// delete employee by id in alert box
+
+  Future<void> checkIdforDelete({required String id}) async {}
 }
