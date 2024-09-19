@@ -1,4 +1,5 @@
 import 'package:employee_management/app_controllers/api_helper/provider/employee_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
       title: 'employee_management',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
       home: const HomePage(),

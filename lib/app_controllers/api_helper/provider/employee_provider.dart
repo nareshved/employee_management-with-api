@@ -55,10 +55,11 @@ class EmployeeProvider extends ChangeNotifier {
 
   Future<void> editEmployee(String id, EmployeeModel employee) async {
     try {
-      if (employee.name != null && employee.country != null) {
+      if (employee.id != null) {
         await ApiHelper.editEmployee(id, employee);
-      } else {}
-
+      } else {
+        print("id should not be null");
+      }
       notifyListeners();
     } catch (e) {
       log("edit employee : ${e.toString()}");
@@ -70,7 +71,7 @@ class EmployeeProvider extends ChangeNotifier {
       await ApiHelper.deleteEmployee(id);
       notifyListeners();
     } catch (e) {
-      log("employee delete success in provider ${e.toString()}");
+      log("employee not delete success in provider ${e.toString()}");
     }
   }
 

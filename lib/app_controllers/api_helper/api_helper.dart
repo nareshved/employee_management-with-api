@@ -69,8 +69,8 @@ class ApiHelper {
   static Future<void> editEmployee(String id, EmployeeModel employee) async {
     try {
       final response = await http.put(
-        Uri.parse('$apiUrl/$id'),
-        headers: {"Content-Type": "application/json"},
+        Uri.parse(
+            'https://669b3f09276e45187d34eb4e.mockapi.io/api/v1/employee/1'),
         body: jsonEncode(employee.toJson()),
       );
       if (response.statusCode == 200) {

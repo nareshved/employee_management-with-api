@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:employee_management/pages/create_employee.dart';
+import 'package:employee_management/pages/manage_employee.dart';
 import 'package:employee_management/pages/details_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../app_controllers/api_helper/api_helper.dart';
 import '../app_controllers/api_helper/provider/employee_provider.dart';
+import '../demo_lottie.dart';
 import '../widgets/delete_alert_box.dart';
-import '../widgets/search_controller.dart';
 import 'edit_employee.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _searchController = TextEditingController();
+//  final TextEditingController _searchController = TextEditingController();
   final TextEditingController deleteController = TextEditingController();
 
   @override
@@ -38,12 +38,12 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Employees"),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.forward),
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const CreateEmployeePage(),
+                builder: (context) => const ManageEmployeePage(),
               ));
         },
       ),
@@ -79,6 +79,8 @@ class _HomePageState extends State<HomePage> {
                     //   color: Colors.grey,
                     // ),
 
+                    //      Flexible(child: const SearchBarWidget()),
+
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             title: Text(eachEmployee.name!),
-                            subtitle: Text(eachEmployee.state!),
+                            subtitle: Text(eachEmployee.id!),
                             trailing: SizedBox(
                               width: 80,
                               child: Row(
@@ -115,16 +117,24 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        EmployeeEditPage.editEmployeeData(
-                                            createdAt: eachEmployee.createdAt!,
-                                            name: eachEmployee.name!,
-                                            avatar: eachEmployee.avatar!,
-                                            emailId: eachEmployee.emailId!,
-                                            id: eachEmployee.id!,
-                                            mobile: eachEmployee.mobile!,
-                                            state: eachEmployee.state!,
-                                            district: eachEmployee.district!,
-                                            email: eachEmployee.email!);
+                                        // EmployeeEditPage.editEmployeeData(
+                                        //     createdAt: eachEmployee.createdAt!,
+                                        //     name: eachEmployee.name!,
+                                        //     avatar: eachEmployee.avatar!,
+                                        //     emailId: eachEmployee.emailId!,
+                                        //     id: eachEmployee.id!,
+                                        //     mobile: eachEmployee.mobile!,
+                                        //     state: eachEmployee.state!,
+                                        //     district: eachEmployee.district!,
+                                        //     email: eachEmployee.email!);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EmployeeEditPage(
+                                                editEmployee: eachEmployee,
+                                              ),
+                                            ));
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -148,9 +158,23 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DemoLottie(),
+                              ));
+                        },
+                        child: const Text("lottile files"))
                   ],
                 )
-              : Center(child: Lottie.asset("assets/lottie_home/users.json"));
+              : Center(
+                  child: Lottie.asset(
+                      "assets/lottie/Animation - 1726742651273.json"));
         },
       )),
     );

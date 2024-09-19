@@ -13,7 +13,7 @@ Widget employeeEditTextField(
     required String lableName}) {
   return Row(
     children: [
-      SizedBox(width: 80, child: Text(feildName)),
+      SizedBox(width: 70, child: Text(feildName)),
       const SizedBox(
         width: 14,
       ),

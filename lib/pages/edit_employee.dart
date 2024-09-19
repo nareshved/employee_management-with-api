@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:employee_management/app_controllers/api_helper/provider/employee_provider.dart';
 import 'package:employee_management/models/countries_model.dart';
@@ -317,63 +316,181 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
 }
 
 
-// BlocBuilder<CoursesCubit, CoursesState>(
-//                   builder: (context, state) {
-//                     if (state is CoursesLoadingState) {
-//                       return const Text("Loading....");
-//                     } else if (state is CoursesLoadedState) {
-//                       return Expanded(
-//                         flex: 1,
+
+// import 'dart:developer';
+
+// import 'package:dropdown_textfield/dropdown_textfield.dart';
+// import 'package:employee_management/app_controllers/api_helper/provider/employee_provider.dart';
+// import 'package:employee_management/models/countries_model.dart';
+// import 'package:employee_management/models/employee_model.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import '../widgets/text_form_field.dart';
+
+// class EmployeeEditPage extends StatelessWidget {
+//   final EmployeeModel editEmployee;
+
+//   EmployeeEditPage({super.key, required this.editEmployee});
+
+//   static const employeeEditKey = GlobalKey<FormState>;
+
+//   String? selectNewCountry;
+
+//   TextEditingController createdAt = TextEditingController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final mq = MediaQuery.sizeOf(context);
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Edit Employees"),
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16),
+//         child: Consumer<EmployeeProvider>(builder: (context, provider, child) {
+//           if (provider.countries.isEmpty) {
+//             provider.fetchCountries();
+//             return const Center(
+//               child: CircularProgressIndicator(),
+//             );
+//           }
+//           return ListView(
+//             children: [
+//               Column(
+//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                 children: [
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "CreatedAt",
+//                     lableName: "CreatedAt",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "Name",
+//                     lableName: "Name",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "Avatar",
+//                     lableName: "Avatar",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "Email Id",
+//                     lableName: "Email Id",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.number,
+//                     feildName: "Id",
+//                     lableName: "Id",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.number,
+//                     feildName: "Mobile",
+//                     lableName: "Mobile",
+//                     controller: createdAt,
+//                   ),
+//                   Row(
+//                     children: [
+//                       const SizedBox(width: 80, child: Text("Country")),
+//                       const SizedBox(
+//                         width: 14,
+//                       ),
+//                       Container(
+//                         decoration: BoxDecoration(
+//                             borderRadius: BorderRadius.circular(7),
+//                             border: Border.all(width: 1, color: Colors.grey)),
 //                         child: DropDownTextField(
-//                           padding: EdgeInsets.only(top: 10.h),
+//                           initialValue: editEmployee.country,
+//                           padding: const EdgeInsets.only(top: 10),
 //                           enableSearch: false,
-//                           textFieldDecoration: InputDecoration(
-//                               prefixIcon: const Icon(
-//                                 Icons.tv_outlined,
+//                           textFieldDecoration: const InputDecoration(
+//                               constraints: BoxConstraints(maxWidth: 350),
+//                               prefixIcon: Icon(
+//                                 Icons.flag,
 //                                 color: Colors.grey,
 //                               ),
-//                               labelStyle: TextStyle(
-//                                   fontSize: 15.sp, color: Colors.black),
+//                               labelStyle:
+//                                   TextStyle(fontSize: 15, color: Colors.black),
 //                               border: InputBorder.none,
-//                               contentPadding:
-//                                   EdgeInsets.only(left: 10.w, top: 9.h),
-//                               hintText: "Mobile App Development"),
-//                           dropDownList: state.coursesModel.lData!
-//                               .map<DropDownValueModel>((Data newdata) {
-//                             log(newdata.name.toString());
+//                               contentPadding: EdgeInsets.only(left: 10, top: 9),
+//                               hintText: "Select Country"),
+//                           dropDownList: provider.countries
+//                               .map<DropDownValueModel>(
+//                                   (CountriesModel newdata) {
+//                             log(newdata.country.toString());
 //                             return DropDownValueModel(
-//                                 name: newdata.name.toString(),
+//                                 name: newdata.country.toString(),
 //                                 value: newdata.id.toString());
 //                           }).toList(),
 //                           onChanged: (val) {
-//                             setState(() {
-//                               course = val.name;
-//                             });
-//                             log(course);
+//                             // setState(() {
+//                             //   course = val.name;
+//                             // });
+//                             // log(course);
 //                           },
 //                         ),
-//                       );
-//                     } else if (state is CoursesErrorState) {
-//                       return Center(
-//                         child: Text(state.errormsg.toString()),
-//                       );
-//                     } else {
-//                       return Container();
-//                     }
-//                   },
-//                 // )),
+//                       ),
+//                     ],
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "State",
+//                     lableName: "State",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "District",
+//                     lableName: "District",
+//                     controller: createdAt,
+//                   ),
+//                   employeeEditTextField(
+//                     keyboard: TextInputType.text,
+//                     feildName: "Email",
+//                     lableName: "Email",
+//                     controller: createdAt,
+//                   ),
+//                   OutlinedButton.icon(
+//                       onPressed: () {},
+//                       label: Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           const Icon(Icons.save),
+//                           SizedBox(
+//                             width: mq.width * 0.012,
+//                           ),
+//                           const Text("Save Employee"),
+//                         ],
+//                       )),
+//                 ],
+//               ),
+//             ],
+//           );
+//         }),
+//       ),
+//     );
+//   }
+// }
+
 
 
 
 
 /// old dropdown
-// /// 
+// ///
 //  Container(
 //                           decoration: BoxDecoration(
 //                               borderRadius: BorderRadius.circular(7),
 //                               border: Border.all(width: 1, color: Colors.grey)),
 //                           child: DropdownButton(
-                            
+
 //                             hint: const Text("Select Country"),
 //                             items: provider.countries
 //                                 .map(
@@ -383,7 +500,7 @@ class _EmployeeEditPageState extends State<EmployeeEditPage> {
 //                                 .toList(),
 //                             onChanged: (value) {
 //                           //    log("user select country -- $value");
-                          
+
 //                             },
 //                           ),
 //                         ),
