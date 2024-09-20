@@ -116,24 +116,16 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        // EmployeeEditPage.editEmployeeData(
-                                        //     createdAt: eachEmployee.createdAt!,
-                                        //     name: eachEmployee.name!,
-                                        //     avatar: eachEmployee.avatar!,
-                                        //     emailId: eachEmployee.emailId!,
-                                        //     id: eachEmployee.id!,
-                                        //     mobile: eachEmployee.mobile!,
-                                        //     state: eachEmployee.state!,
-                                        //     district: eachEmployee.district!,
-                                        //     email: eachEmployee.email!);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EmployeeEditPage(
-                                                editEmployee: eachEmployee,
-                                              ),
-                                            ));
+                                        EmployeeEditPage.editEmployeeData(
+                                            createdAt: eachEmployee.createdAt!,
+                                            name: eachEmployee.name!,
+                                            avatar: eachEmployee.avatar!,
+                                            emailId: eachEmployee.emailId!,
+                                            id: eachEmployee.id!,
+                                            mobile: eachEmployee.mobile!,
+                                            state: eachEmployee.state!,
+                                            district: eachEmployee.district!,
+                                            email: eachEmployee.email!);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
