@@ -6,7 +6,6 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../app_controllers/api_helper/api_helper.dart';
 import '../app_controllers/api_helper/provider/employee_provider.dart';
-import '../demo_lottie.dart';
 import '../widgets/delete_alert_box.dart';
 import 'edit_employee.dart';
 
@@ -158,23 +157,15 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DemoLottie(),
-                              ));
-                        },
-                        child: const Text("lottile files"))
                   ],
                 )
               : Center(
+                  child: CircleAvatar(
+                  radius: 120,
                   child: Lottie.asset(
-                      "assets/lottie/Animation - 1726742651273.json"));
+                    "assets/lottie/usercheck.json",
+                  ),
+                ));
         },
       )),
     );

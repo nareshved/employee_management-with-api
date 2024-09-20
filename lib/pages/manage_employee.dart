@@ -31,7 +31,7 @@ class ManageEmployeePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const CreateEmployeePage())),
-              child: CardWidgetGrid(
+              child: const CardWidgetGrid(
                 title: "Create employee",
               ),
             ),

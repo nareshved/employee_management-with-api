@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:employee_management/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -44,7 +45,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     width: 10,
                   ),
                   CircleAvatar(
-                    backgroundColor: Colors.yellow,
+                    backgroundColor: Colors.blueGrey,
                     child: IconButton(
                         onPressed: () async {
                           if (id.text.isNotEmpty) {
@@ -63,7 +64,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                                 });
                               }
                             } catch (e) {
-                              print('Error fetching employee data: $e');
+                              log('Error fetching employee data: $e');
                               setState(() {
                                 employeeModel =
                                     null; // Reset model if there's an error

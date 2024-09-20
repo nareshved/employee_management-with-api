@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:employee_management/models/create_user_model.dart';
 import 'package:http/http.dart' as http;
 import '../../models/countries_model.dart';
 import '../../models/employee_model.dart';
@@ -48,23 +49,29 @@ class ApiHelper {
     }
   }
 
-  static Future<void> createEmployee() async {
-    //EmployeeModel employee
-    var uri = Uri.parse(apiUrl);
+  // Future<CreateUserModel> createEmployee() async {
+  //   //EmployeeModel employee
 
-    final response = await http.post(
-      uri,
-    );
-    if (response.statusCode == 201) {
-      log(response.body.toString());
+  //   var uri = Uri.parse(
+  //       "https://669b3f09276e45187d34eb4e.mockapi.io/api/v1/employee");
 
-      ///
-    } else {
-      throw Exception("Failed to create employee");
-
-      ///
-    }
-  }
+  //   try {
+  //     final response = await http.post(uri,
+  //         headers: {'Content-Type': 'application/json'},
+  //         body: jsonEncode(createUser.toJson()));
+  //     if (response.statusCode == 201) {
+  //       log("sent user data sucessfully");
+  //       Map<String, dynamic> responsedata = await jsonDecode(response.body);
+  //       CreateUserModel createUserModel =
+  //           CreateUserModel.fromJson(responsedata);
+  //       log(responsedata.toString());
+  //       return createUserModel;
+  //     }
+  //   } catch (e) {
+  //     log("create user error check please ${e.toString()}");
+  //     return CreateUserModel();
+  //   }
+  // }
 
   static Future<void> editEmployee(String id, EmployeeModel employee) async {
     try {

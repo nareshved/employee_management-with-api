@@ -8,7 +8,7 @@ class CardWidgetGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.yellow,
+      color: Colors.blueGrey,
       margin: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

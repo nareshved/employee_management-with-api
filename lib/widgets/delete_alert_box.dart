@@ -31,6 +31,9 @@ deleteEmployeeAlertBox(BuildContext context,
             OutlinedButton(
                 onPressed: () {
                   ApiHelper.deleteEmployee(deleteController.text);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("employee deleted !")));
                 },
                 child: const Text("Delete")),
           ],
